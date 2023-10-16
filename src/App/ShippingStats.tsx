@@ -23,7 +23,7 @@ const f = (input: unknown): string => {
 export const ShippingStats = () => {
   const { values } = useFormikContext()
 
-  const shipments: IShipment[] = get(values, 'shipments')
+  const shipments: IShipment[] = get(values, 'shipments') as any
   const averageTime = getAverageShipmentTime(shipments)
   const averageStats = getAverageResourcesPerMinute(shipments, averageTime)
 

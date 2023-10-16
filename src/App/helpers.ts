@@ -33,7 +33,7 @@ export const getAverageShipmentTime = (shipments: IShipment[]): number | null =>
   return mean(shipmentTimes)
 }
 
-export const getAverageResourcesPerMinute = (shipments: IShipment[], avgShipmentTime: number) => {
+export const getAverageResourcesPerMinute = (shipments: IShipment[], avgShipmentTime: number | null | undefined) => {
   const resourceIndex = {}
 
   if (!shipments) {
@@ -76,7 +76,7 @@ export const getAverageResourcesPerMinute = (shipments: IShipment[], avgShipment
     const value = averagePerShipment[current]
     return {
       ...acc,
-      [current]: value / avgShipmentTime
+      [current]: value / (isNil(avgShipmentTime) ? 1 : avgShipmentTime)
     }
   }, {})
 
