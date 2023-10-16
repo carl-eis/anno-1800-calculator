@@ -6,6 +6,7 @@ import { getAverageResourcesPerMinute, getAverageShipmentTime } from './helpers.
 import { IShipment } from './interfaces.ts'
 import { ShipmentStatsBar, StatsRow } from './styles.tsx'
 
+// TODO: Refactor
 const f = (input: unknown): string => {
   console.log('input: ', input)
 
