@@ -1,27 +1,15 @@
-# React + TypeScript + Vite
+# Anno 1800 Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple shipping time calculator for anno 1800.
 
-Currently, two official plugins are available:
+Live at https://carl-eis.github.io/anno-1800-calculator
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Usage
 
-## Expanding the ESLint configuration
+1. Click "Add shipment"
+2. Fill in shipment time, cargo
+3. Add more shipments to calculate mean shipping time of goods.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Adding another shipment will always copy the content of the previous shipment.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+-----

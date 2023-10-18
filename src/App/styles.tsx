@@ -122,10 +122,16 @@ export const ButtonGrid = ({ children }) => {
 export const StatsRow = styled.div`
   div:first-child {
     text-transform: capitalize;
+    max-width: 260px;
   }
+
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-width: 260px;
+  grid-template-columns: 120px 1fr;
+  grid-gap: 10px;
+
+  @media (max-width: ${Breakpoints.TABLET}) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const FooterContainer = styled.div`
