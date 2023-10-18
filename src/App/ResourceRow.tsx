@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import React, { useCallback } from 'react'
 import Button from 'react-bootstrap/Button'
 import { removeItemAtIndex } from './helpers.ts'
-import { CargoCloseContainer, CargoInputRow, CargoRowContainer } from './styles.tsx'
+import { CargoCloseContainer, CargoInputRow, CargoRowContainer, StyledCloseButton } from './styles.tsx'
 import { TextInput } from './TextInput.tsx'
 
 export const ResourceRow = (props) => {
@@ -21,7 +21,6 @@ export const ResourceRow = (props) => {
 
   return (
     <div>
-      {/*<h6>{resourceName} {index + 1}</h6>*/}
       <CargoRowContainer>
         <CargoInputRow>
           <Field
@@ -36,9 +35,9 @@ export const ResourceRow = (props) => {
           />
         </CargoInputRow>
         <CargoCloseContainer>
-          <Button onClick={removeResource} variant={'info'} style={{ height: '38px' }}>
+          <StyledCloseButton onClick={removeResource} variant={'info'}>
             <FontAwesomeIcon icon={['fas', 'trash']}/>
-          </Button>
+          </StyledCloseButton>
         </CargoCloseContainer>
       </CargoRowContainer>
     </div>
