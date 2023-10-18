@@ -20,7 +20,7 @@ export const Body = styled.div<any>`
   overflow: visible;
 `
 
-export const StyledCloseButton = styled(Button)`
+export const StyledCloseButton = styled(Button)<any>`
   height: 38px;
 
   @media(max-width: ${Breakpoints.MOBILE}) {
