@@ -1,126 +1,18 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckSquare, faCoffee, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Field, Formik, useFormikContext } from 'formik'
+import { Formik, useFormikContext } from 'formik'
 import { cloneDeep, get } from 'lodash'
-import React, { FC, useCallback } from 'react'
+import React from 'react'
 import { Container } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import { RecoilRoot, } from 'recoil'
-import { removeItemAtIndex } from './helpers.ts'
+import { NestedForm } from './NestedForm.tsx'
+import { ShipmentRow } from './ShipmentRow.tsx'
 import { ShippingStats } from './ShippingStats.tsx'
 
-import { Body, CardsGrid, CargoCloseContainer, CargoInputRow, CargoRowContainer, ShipmentCard } from './styles.tsx'
-import { TextInput } from './TextInput.tsx'
+import { Body, CardsGrid } from './styles.tsx'
 
 library.add(faCheckSquare, faCoffee, faTrash)
-
-const ResourceRow = (props) => {
-  const { dataPath: originalDataPath, index } = props
-  const dataPath = `${originalDataPath}.${index}`
-  const getFieldName = useCallback((name) => `${dataPath}.${name}`, [])
-
-  const { values: formValues, setFieldValue } = useFormikContext()
-
-  const removeResource = () => {
-    const existingValues: any[] = get(formValues, originalDataPath) ?? []
-    setFieldValue(originalDataPath, removeItemAtIndex(existingValues, index))
-  }
-
-  return (
-    <div>
-      {/*<h6>{resourceName} {index + 1}</h6>*/}
-      <CargoRowContainer>
-        <CargoInputRow>
-          <Field
-            name={getFieldName('cargoName')}
-            component={TextInput}
-            placeholder={'Cargo name'}
-          />
-          <Field
-            name={getFieldName('cargoAmount')}
-            component={TextInput}
-            placeholder={'Cargo amount'}
-          />
-        </CargoInputRow>
-        <CargoCloseContainer>
-          <Button onClick={removeResource} variant={'info'} style={{ height: '38px' }}>
-            <FontAwesomeIcon icon={['fas', 'trash']}/>
-          </Button>
-        </CargoCloseContainer>
-      </CargoRowContainer>
-    </div>
-  )
-}
-
-const ShipmentRow = (props) => {
-  const { dataPath: originalDataPath, index, resourceName } = props
-
-  const { values: formValues, setFieldValue } = useFormikContext()
-
-  const dataPath = `${originalDataPath}.${index}`
-
-  const addResource = (dataPath: string) => () => {
-    const existingValues: any[] = get(formValues, dataPath) ?? []
-    setFieldValue(dataPath, [...existingValues, {}])
-  }
-
-  const removeResource = () => {
-    const existingValues: any[] = get(formValues, originalDataPath) ?? []
-    setFieldValue(originalDataPath, removeItemAtIndex(existingValues, index))
-  }
-
-  return (
-    <ShipmentCard>
-      {/*<pre>{JSON.stringify(props, null, 2)}</pre>*/}
-      <h3>{resourceName} {index + 1}</h3>
-      <Field label="Time ago" placeholder={'Shipment time'} component={TextInput} name={`${dataPath}.timeAgo`}/>
-      <NestedForm
-        DataRowComponent={ResourceRow}
-        resourceName={'Cargo'}
-        dataPath={`${dataPath}.resources`}
-      />
-      <Button onClick={addResource(`${dataPath}.resources`)}>Add Cargo</Button>
-      <Button onClick={removeResource} variant={'danger'} style={{ marginTop: '10px' }}>Remove Shipment</Button>
-    </ShipmentCard>
-  )
-}
-
-interface INestedFormData {
-  dataPath: string;
-  resourceName: string;
-  DataRowComponent: any;
-}
-
-const NestedForm: FC<INestedFormData> = (props) => {
-  const {
-    dataPath,
-    DataRowComponent,
-    resourceName,
-  } = props
-
-  const {
-    values: formValues,
-  } = useFormikContext()
-
-  const data = get(formValues, dataPath)
-
-  return (
-    <>
-      {data?.map((item, index) => {
-        return (
-          <DataRowComponent
-            resourceName={resourceName}
-            data={item}
-            dataPath={`${dataPath}`}
-            index={index}
-            key={index}
-          />
-        )
-      })}
-    </>
-  )
-}
 
 const DebugFormValues = () => {
   const { values } = useFormikContext()
